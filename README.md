@@ -1,20 +1,40 @@
-# myportofolio_mobile
+<div align="center">
+<h1 align="center">📱 My Portofolio Mobile</h1>
+<p align="center">Portofolio Mobile App for PBP</p>
 
-A new Flutter project.
+Nama: Risyad Athaya Muhammad
 
-## Getting Started
+NPM: 2506595890
 
-This project is a starting point for a Flutter application.
+Kelas: PBP F
+</div>
 
-A few resources to get you started if this is your first Flutter project:
+## ⚙️ How to Run
+1. **Clone this repository** from terminal using the following command
+   ```bash
+   $ git clone https://github.com/RisyadAthaya/myportofolio_mobile.git
+   ```
+   then go to the project root directory
+   ```bash
+   $ cd myportofolio_mobile
+   ```
+2. **Install the dependencies** listed in pubspec.yaml using the following command (make sure the
+   Flutter SDK is already installed)
+   ```bash
+   $ flutter pub get
+   ```
+3. **Prepare a device** by starting an Android emulator / iOS simulator, or by connecting a physical
+   device with USB debugging enabled, then check that it is detected using the following command
+   ```bash
+   $ flutter devices
+   ```
+4. **Run the app** using the following command
+   ```bash
+   $ flutter run
+   ```
+   then wait until the build finishes and the app will open on the selected device.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ❓ Reflective Questions
 
 ### Tugas 7
 
@@ -85,3 +105,25 @@ awal sehingga kode dikompilasi ulang dan semua state direset ke state awal.
 Full restart benar-benar mematikan aplikasi sepenuhnya dan membangun ulang dari nol. Hot restart
 diperlukan ketika ada nilai variabel global atau field static. Selain itu, bisa juga karena ada
 perubahan pada main().
+
+### Tugas 8
+1. Jelaskan perbedaan antara Navigator.push(), Navigator.pushReplacement(), dan Navigator.pop().
+   Metode apa yang digunakan untuk membuka formulir dari kartu aksi? Jelaskan juga bagaimana opsi
+   Home di drawer membawa pengguna kembali ke halaman utama.
+
+
+
+2. Bagaimana susunan Scaffold, AppBar, dan Drawer membantu menjaga struktur halaman tetap konsisten?
+   Berikan satu contoh penggunaan warna tema portofolio di lebih dari satu halaman.
+
+
+
+3. Mengapa tata letak tersebut dipilih untuk formulir? Jelaskan peran widget pengatur jarak dan
+   widget penggulir ketika ruang layar terbatas.
+
+
+
+4. Apa peran GlobalKey<FormState>, validator, dan validate() saat tombol Simpan ditekan? Berikan
+   satu contoh nilai yang ditolak oleh validasi dan jelaskan mengapa memilih jenis input atau papan
+   ketik saja belum cukup.
+
