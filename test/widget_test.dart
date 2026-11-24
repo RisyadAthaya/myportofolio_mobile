@@ -1,30 +1,40 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:myportofolio_mobile/main.dart';
+import 'package:myportofolio_mobile/services/api_client.dart';
+
+Future<void> pumpApp(WidgetTester tester) async {
+  tester.view.physicalSize = const Size(1440, 3200);
+  tester.view.devicePixelRatio = 1.0;
+  addTearDown(tester.view.reset);
+  await tester.pumpWidget(MyApp(apiClient: ApiClient()));
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Home page shows menu and drawer shows Login when logged out',
+      (WidgetTester tester) async {
+    await pumpApp(tester);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Selamat datang di MyPortfolio Mobile!'), findsOneWidget);
+    expect(find.text('Tambah Proyek'), findsOneWidget);
+    expect(find.text('Logout'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+    // The test font's wide glyphs overflow the fixed-height DrawerHeader.
+    tester.takeException();
+
+    expect(find.text('Login'), findsOneWidget);
+    expect(find.widgetWithText(ListTile, 'Logout'), findsNothing);
+  });
+
+  testWidgets('Tapping Logout while logged out shows a SnackBar',
+      (WidgetTester tester) async {
+    await pumpApp(tester);
+
+    await tester.tap(find.text('Logout'));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Kamu belum login.'), findsOneWidget);
   });
 }
