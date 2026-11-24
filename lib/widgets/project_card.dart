@@ -2,11 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
 
   const ItemCard(this.item, {super.key});
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> _onTap(BuildContext context) async {
+    if (item.name == "Lihat Proyek") {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(builder: (context) => const ProjectListScreen()),
+      );
+      return;
+    }
+
+    if (item.name == "Tambah Proyek") {
+      if (!await ensureLoggedIn(context)) return;
+      if (!context.mounted) return;
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(builder: (context) => const ProjectFormPage()),
+      );
+      return;
+    }
+
+    if (item.name == "Tambah Pengalaman") {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(builder: (context) => const ExperienceFormPage()),
+      );
+      return;
+    }
+
+    if (item.name == "Logout") {
+      final authState = context.read<AuthState>();
+      if (!authState.isLoggedIn) {
+        _showSnackBar(context, "Kamu belum login.");
+        return;
+      }
+      await authState.logout();
+      if (!context.mounted) return;
+      _showSnackBar(context, "Kamu berhasil logout.");
+      return;
+    }
+
+    _showSnackBar(context, "Kamu telah menekan tombol ${item.name}!");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,30 +68,7 @@ class ItemCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna. Area responsif terhadap sentuhan
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!"),
-              ),
-            );
-
-          // Navigate ke halaman yang sesuai
-          if (item.name == "Tambah Proyek") {
-            // Gunakan Navigator.push() untuk melakukan navigasi ke MaterialPageRoute yang mencakup ProjectFormPage
-            Navigator.push(context,
-                MaterialPageRoute<void>(
-                  builder: (context) => const ProjectFormPage(),
-                ));
-          } else if (item.name == "Tambah Pengalaman") {
-            Navigator.push(context,
-                MaterialPageRoute<void>(
-                  builder: (context) => const ExperienceFormPage(),
-                ));
-          }
-        },
+        onTap: () => _onTap(context),
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Center(
