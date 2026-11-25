@@ -11,8 +11,9 @@ Future<void> pumpApp(WidgetTester tester) async {
 }
 
 void main() {
-  testWidgets('Home page shows menu and drawer shows Login when logged out',
-      (WidgetTester tester) async {
+  testWidgets('Home page shows menu and drawer shows Login when logged out', (
+    WidgetTester tester,
+  ) async {
     await pumpApp(tester);
 
     expect(find.text('Selamat datang di MyPortfolio Mobile!'), findsOneWidget);
@@ -28,8 +29,9 @@ void main() {
     expect(find.widgetWithText(ListTile, 'Logout'), findsNothing);
   });
 
-  testWidgets('Tapping Logout while logged out shows a SnackBar',
-      (WidgetTester tester) async {
+  testWidgets('Tapping Logout while logged out shows a SnackBar', (
+    WidgetTester tester,
+  ) async {
     await pumpApp(tester);
 
     await tester.tap(find.text('Logout'));

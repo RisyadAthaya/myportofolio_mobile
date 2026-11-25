@@ -39,7 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Login failed (${e.statusCode}). Check your credentials.'),
+          content: Text(
+            'Login failed (${e.statusCode}). Check your credentials.',
+          ),
         ),
       );
     } finally {
@@ -105,10 +107,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: _isSubmitting ? null : _submit,
                 child: _isSubmitting
                     ? const SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
                     : const Text('Login'),
               ),
             ],

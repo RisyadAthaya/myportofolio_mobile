@@ -22,7 +22,9 @@ class ItemCard extends StatelessWidget {
     if (item.name == "Lihat Proyek") {
       Navigator.push(
         context,
-        MaterialPageRoute<void>(builder: (context) => const ProjectListScreen()),
+        MaterialPageRoute<void>(
+          builder: (context) => const ProjectListScreen(),
+        ),
       );
       return;
     }
@@ -40,7 +42,9 @@ class ItemCard extends StatelessWidget {
     if (item.name == "Tambah Pengalaman") {
       Navigator.push(
         context,
-        MaterialPageRoute<void>(builder: (context) => const ExperienceFormPage()),
+        MaterialPageRoute<void>(
+          builder: (context) => const ExperienceFormPage(),
+        ),
       );
       return;
     }
@@ -75,11 +79,7 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
