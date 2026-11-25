@@ -130,9 +130,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
         decoration: InputDecoration(
           hintText: label,
           labelText: label,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
         onChanged: onChanged,
         validator: validator,
@@ -144,11 +142,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add Project Form',
-          ),
-        ),
+        title: const Center(child: Text('Add Project Form')),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),

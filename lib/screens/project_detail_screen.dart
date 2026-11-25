@@ -58,10 +58,7 @@ class ProjectDetailScreen extends StatelessWidget {
   Widget _buildSection(String label, String value) {
     return Card(
       child: ListTile(
-        title: Text(
-          label,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: SelectableText(value),
       ),
     );
